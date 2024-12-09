@@ -7,5 +7,5 @@ import com.myRestaurant.manager.Dto.UserDto;
 public interface UserServiceImpl {
 	List<UserDto> getAllUser();
 	public List<UserDto> searchUsersByUsername(String username);
-	boolean deleteUser(int id);
+	public boolean deleteUser(int id);
 }

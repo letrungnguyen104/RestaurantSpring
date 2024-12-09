@@ -60,4 +60,18 @@ public class ManageAccountController {
         return userService.searchUsersByUsername(username);
     }
     
+    @DeleteMapping("/manage-account/delete/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable int id) {
+        ResponseData responseData = new ResponseData();
+        try {
+            boolean isDeleted = userService.deleteUser(id);
+            responseData.setData(isDeleted);
+            responseData.setDescription(isDeleted ? "Delete account successful!" : "Account not found!");
+            return new ResponseEntity<>(responseData, HttpStatus.OK);
+        } catch (Exception e) {
+            responseData.setStatus(500); // Internal Server Error
+            responseData.setDescription("An unexpected error occurred. Please try again.");
+            return new ResponseEntity<>(responseData, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

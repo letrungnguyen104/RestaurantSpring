@@ -87,9 +87,9 @@ public class UserService implements UserServiceImpl{
 	@Override
 	public boolean deleteUser(int id) {
 		if (userRepository.existsById(id)) {
-            userRepository.deleteById(id);
-            return true;
-        }
-        return false;
+	        userRepository.deleteById(id);
+	        return true;
+	    }
+	    return false;
 	}
 }
