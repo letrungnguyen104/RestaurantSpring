@@ -38,6 +38,9 @@ public class UserEntities {
 	@ManyToOne
 	@JoinColumn(name = "role_id")
 	private RoleEntities roleEntities;
+	
+	@OneToMany(mappedBy = "user")
+	private Set<InvoiceEntities> invoice;
 
 	public RoleEntities getRoleEntities() {
 		return roleEntities;
@@ -101,5 +104,13 @@ public class UserEntities {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Set<InvoiceEntities> getInvoice() {
+		return invoice;
+	}
+
+	public void setInvoice(Set<InvoiceEntities> invoice) {
+		this.invoice = invoice;
 	}
 }

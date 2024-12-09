@@ -1,10 +1,17 @@
 package com.myRestaurant.manager.Entities;
 
+import java.util.List;
+import java.util.Set;
+
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity(name = "tables")
 public class TableEntities {
@@ -21,6 +28,9 @@ public class TableEntities {
     @ManyToOne
     @JoinColumn(name = "area_id")
     private AreaEntities areaEntities;
+    
+    @OneToMany(mappedBy = "table")
+    private Set<InvoiceEntities> invoice;
 
     public String getTableId() {
         return tableId;
@@ -53,5 +63,13 @@ public class TableEntities {
     public void setAreaEntities(AreaEntities areaEntities) {
         this.areaEntities = areaEntities;
     }
+
+	public Set<InvoiceEntities> getInvoice() {
+		return invoice;
+	}
+
+	public void setInvoice(Set<InvoiceEntities> invoice) {
+		this.invoice = invoice;
+	}
 }
 

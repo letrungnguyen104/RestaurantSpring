@@ -17,7 +17,7 @@ public class HomepageUserViews{
 	}
 	@GetMapping("/invoice")
 	public String cashierViews() {
-		return "homepagecashier";
+		return "seeinvoice";
 	}
 	@GetMapping("/points")
 	public String chefViews() {
