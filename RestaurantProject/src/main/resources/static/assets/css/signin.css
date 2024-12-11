@@ -20,18 +20,19 @@ h3{
 .container{
     width: 950px;
     height: 650px;
-    border-radius: 30px;
+    border-radius: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: rgb(196, 215, 245);
+    background: linear-gradient(to bottom, rgb(196, 215, 245), rgb(116, 160, 232));
 }
 form{
     width: 500px;
     height: 500px;
     border: 1px solid rgba(255, 255, 255, 0.5);
     background-color: rgba(255, 255, 255, 0.3);
-    border-radius: 30px;
+    border-radius: 15px;
     backdrop-filter: blur(10px);
     padding: 10px;
 }
@@ -44,10 +45,15 @@ form > *{
     border-radius: 30px;
     margin: 10px;
     border: 1px solid #427aae;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.7);
 }
 .information input > *{
     margin-left: 20px;
+}
+.information input:focus{
+    outline: none;
+    border-color: #132382; /* Hiển thị viền màu xanh khi focus vào trường */
+    background-color: rgba(255, 255, 255, 0.5);
 }
 .information{
     display: flex;
@@ -60,7 +66,7 @@ form > *{
     cursor: pointer;
     padding: 10px 25px;
     border-radius: 30px;
-    background-color: #7DC0FF;
+    background-color: rgb(27, 91, 174);
     border: 1px solid #7DC0FF;
     color: white;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -75,7 +81,4 @@ form{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-.information input{
-	padding-left: 12px;
 }
