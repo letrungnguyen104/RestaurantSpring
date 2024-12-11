@@ -105,6 +105,10 @@ body{
     background-color: var(--color-main);
     border-radius: 10px;
     padding: 20px;
+    
+    overflow-y: auto; /* Thanh trượt dọc */
+    overflow-x: hidden; /* Ẩn thanh trượt ngang (nếu cần) */
+    max-height: 100%;
 }
 
 .table-screen .table{
