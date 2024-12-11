@@ -46,6 +46,10 @@
 	                },
 	                success: function (msg) {
 	                    if (msg.data) {
+	                    	const userId = msg.data;  // Thay thế bằng giá trị userId thực tế từ phản hồi của API
+
+	                    	// Lưu userId vào localStorage
+	                    	localStorage.setItem('userId', userId);
 	                    	localStorage.setItem("fullname", msg.description);
 	                    	// Kiểm tra role_id và điều hướng
 	                        if (msg.role_Id === 0) {

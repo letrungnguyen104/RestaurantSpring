@@ -27,4 +27,8 @@ public class HomepageAdminViews {
 	public String addAccount() {
 		return "addaccount";
 	}
+//	@GetMapping("/edit-account")
+//	public String editAccount() {
+//		return "userinformation";
+//	}
 }

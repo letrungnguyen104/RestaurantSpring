@@ -41,6 +41,14 @@
             const currentTable = document.getElementById('current-table');
             const currentArea = document.getElementById('current-area');
 
+            // Lấy userId từ localStorage
+            const userId = localStorage.getItem('userId');
+            if (!userId) {
+                alert('User ID not found. Please log in first.');
+                window.location.href = '/login/signin';  // Chuyển hướng tới trang đăng nhập nếu không có userId
+                return;
+            }
+
             // Lấy danh sách khu vực từ API
             fetch('/choose-table')
                 .then(response => response.json())
@@ -96,7 +104,7 @@
                         tableScreen.innerHTML = ''; // Xóa nội dung cũ
                         data.forEach(table => {
                             const div = document.createElement('div');
-                            div.innerHTML = `
+                            div.innerHTML = ` 
                                 <div>${table.table_id}</div>
                                 <div class="div-bottom">${table.table_status ? 'Đang sử dụng' : 'Bàn trống'}</div>
                             `;
@@ -129,7 +137,8 @@
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
                             tableId: selectedTable,
-                            isAvailable: true, // Cập nhật trạng thái bàn sang "đang sử dụng"
+                            userId: userId, // Truyền userId từ localStorage
+                            isAvailable: false, // Cập nhật trạng thái bàn thành "đang sử dụng"
                         }),
                     })
                         .then(response => response.json())

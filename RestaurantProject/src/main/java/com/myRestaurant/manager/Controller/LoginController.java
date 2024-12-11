@@ -36,7 +36,7 @@ public class LoginController {
 		ResponseData responseData = new ResponseData();
 		if(loginServiceImpl.checkLogin(username, password)) {
 			UserDto user = loginServiceImpl.getUserByUsername(username);
-			responseData.setData(true);
+			responseData.setData(user.getId());
 			responseData.setRole_Id(user.getRoleDto().getRole_id());
 			responseData.setDescription(user.getFullname());
 		}

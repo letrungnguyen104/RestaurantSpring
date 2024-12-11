@@ -2,6 +2,7 @@ package com.myRestaurant.manager.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.myRestaurant.manager.Dto.RoleDto;
 import com.myRestaurant.manager.Dto.UserDto;
+import com.myRestaurant.manager.Entities.RoleEntities;
 import com.myRestaurant.manager.Entities.UserEntities;
 import com.myRestaurant.manager.Repository.UserRepository;
 import com.myRestaurant.manager.Service.Impl.UserServiceImpl;

@@ -9,44 +9,56 @@
 </head>
 <body>
     <div class="show-invoice">
-        <div class="left-content">
-            <div class="table-code">
-                <b>TABLE CODE: <span th:text="${tableCode}"></span></b>
-            </div>
-            <div class="show-invoice-label">
+        <div class = "left-content">
+            <div class = "table-code"><b>TABLE CODE: B2</b></div>
+            <div class = "show-invoice-label">
                 <label for="">XEM HOÁ ĐƠN</label>
             </div>
             <div><b>CHI TIẾT</b></div>
-            <div class="status-button">
-                <button class="details-button" type="button">Trạng thái món</button>
+            <div class = "status-button">
+                <button class = "details-button" type="button">Trạng thái món</button>
             </div>
-            <div class="confirm-button">
-                <button class="details-button" type="button">Xác nhận</button>
+            <div class = "confirm-button">
+                <button class = "details-button" type="button"  onclick="window.location.href='/homepage/homepage-user'">Xác nhận</button>
             </div>
             <p>Có thể thanh toán ngay bằng cách quét mã QR ở góc dưới bên phải!</p>
         </div>
         <div class="right-content">
-            <div class="name-of-func">
+            <div class = "name-of-func">
                 <div><b>XEM TRẠNG THÁI MÓN</b></div>
-                <div><b>Mã hoá đơn: <span th:text="${invoiceId}"></span></b></div>
+                <div><b>Mã hoá đơn: 123214</b></div>
             </div>
-            <div class="table-screen">
-                <!-- Lặp qua danh sách các món ăn -->
-                <div class="foot-form" th:each="invoice : ${invoiceList}" 
-                     th:style="|background-image: url('@{/assets/img/foodimg.png}');|">
+            <div class = "table-screen">
+                <div class = "foot-form" style="background-image: url('/assets/img/foodimg.png');">
                     <div>
-                        <div class="dish-name" th:text="${invoice.dishName}"></div>
-                        <div class="div-bottom">Số lượng: <span th:text="${invoice.quantity}"></span></div>
+                        <div>MÓN A</div>
+                        <div class = "div-bottom">Số lượng: 2</div>
                     </div>
-                    <div class="price">
-                        <span th:text="${#numbers.formatDecimal(invoice.totalPrice, 0, 'POINT', 'COMMA')}"></span>đ
-                    </div>
+                    <div class = "price">140.000đ</div>
                 </div>
-                <!-- Tổng tiền -->
-                <div class="sum">
-                    <div><b style="font-size: 20px;">TỔNG TIỀN: 
-                        <span th:text="${#numbers.formatDecimal(totalPrice, 0, 'POINT', 'COMMA')}"></span>đ</b>
+                <div class = "foot-form foot-form-colorA" style="background-image: url('/assets/img/foodimg.png');">
+                    <div class = "orderedA">
+                        <div>MÓN B</div>
+                        <div class = "div-bottom">Số lượng: 1</div>
                     </div>
+                    <div class = "price">65.000đ</div>
+                </div>
+                <div class = "foot-form foot-form-colorB" style="background-image: url('/assets/img/foodimg.png');">
+                    <div class = "orderedB">
+                        <div>MÓN C</div>
+                        <div class = "div-bottom">Số lượng: 2</div>
+                    </div>
+                    <div class = "price">180.000đ</div>
+                </div>
+                <div class = "foot-form" style="background-image: url('/assets/img/foodimg.png');">
+                    <div>
+                        <div>MÓN D</div>
+                        <div class = "div-bottom">Số lượng: 3</div>
+                    </div> 
+                    <div class = "price">240.000đ</div>
+                </div>
+                <div class = "sum">
+                    <div><b style="font-size: 20px;">TỔNG TIỀN: 625.000đ</b></div>
                     <div><b>Điểm tích luỹ cộng thêm</b></div>
                     <div>
                         <b>Sử dụng điểm tích luỹ</b>
@@ -54,9 +66,9 @@
                     </div>
                     <div style="color: red;"><b>*Quẹt thẻ để sử dụng</b></div>
                 </div>
-                <!-- QR Code -->
-                <div class="pay">
-                    <div class="QR" th:style="|background-image: url('@{/assets/img/qrtest.png}');|"></div>
+                <div class = "pay">
+                    <!-- <div>QR Thanh toán</div> -->
+                    <div class = "QR"  style="background-image: url('/assets/img/qrtest.png');"></div>
                 </div>
             </div>
         </div>

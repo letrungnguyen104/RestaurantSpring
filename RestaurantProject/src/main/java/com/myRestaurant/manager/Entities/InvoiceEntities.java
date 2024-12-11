@@ -34,7 +34,7 @@ public class InvoiceEntities {
     private java.sql.Timestamp createDate;
 
     @Column(name = "sum", nullable = false)
-    private long sum;
+    private float sum;
 
     @Column(name = "point", nullable = false)
     private long point;
@@ -75,12 +75,12 @@ public class InvoiceEntities {
         this.createDate = createDate;
     }
 
-    public long getSum() {
+    public float getSum() {
         return sum;
     }
 
-    public void setSum(long sum) {
-        this.sum = sum;
+    public void setSum(float d) {
+        this.sum = d;
     }
 
     public long getPoint() {

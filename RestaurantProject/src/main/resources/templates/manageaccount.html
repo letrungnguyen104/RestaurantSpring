@@ -19,7 +19,7 @@
                 <div class = "btn-func">
                     <div class = "list-account">Danh sách tài khoản</div>
                     <div class = "add-btn" onclick="window.location.href='/homepage-admin/add-account'">Thêm tài khoản</div>
-                    <div>Thoát</div>
+                    <div onclick="window.location.href='/homepage/homepage-admin'">Thoát</div>
                 </div>
                 <div class="choosetable-to-delete">
                     <div class = "find-username">
@@ -47,7 +47,7 @@
 						        <td th:text="${user.username}"></td>
 						        <td th:text="${user.roleDto.role_name}"></td>
 						        <td>
-						            <button class="edit-button" th:onclick="'/homepage-admin/edit-account/' + ${user.id}">Sửa</button>
+						            <a class="edit-button" th:href="@{/homepage-admin/edit-account/{id}(id=${user.id})}">Sửa</a>
 						            <button class="delete-button" th:onclick="'confirmDelete(' + ${user.id} + ')'" >Xoá</button>
 						        </td>
 						    </tr>
