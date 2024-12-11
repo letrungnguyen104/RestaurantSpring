@@ -3,6 +3,7 @@ package com.myRestaurant.manager.Entities;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,6 +23,7 @@ public class RoleEntities {
 	private String description;
 	
 	@OneToMany(mappedBy = "roleEntities")
+	@JsonManagedReference
 	Set<UserEntities> listuser;
 
 	public int getRole_id() {

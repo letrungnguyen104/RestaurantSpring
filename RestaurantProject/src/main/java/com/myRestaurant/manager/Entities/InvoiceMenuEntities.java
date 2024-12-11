@@ -1,5 +1,7 @@
 package com.myRestaurant.manager.Entities;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -21,10 +23,10 @@ public class InvoiceMenuEntities {
     private MenuEntities menuEntities;
 
     @Column(name = "quantity", nullable = false)
-    private long quantity;
+    private int quantity;
 
     @Column(name = "total_price", nullable = false)
-    private long totalPrice;
+    private BigDecimal totalPrice;
 
     @Column(name = "dish_status", nullable = false)
     private int dishStatus;
@@ -58,15 +60,15 @@ public class InvoiceMenuEntities {
         return quantity;
     }
 
-    public void setQuantity(long quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
-    public long getTotalPrice() {
+    public BigDecimal getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(long totalPrice) {
+    public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
     }
 

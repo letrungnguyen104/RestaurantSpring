@@ -9,6 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
 
@@ -34,13 +35,16 @@ public class InvoiceEntities {
     private java.sql.Timestamp createDate;
 
     @Column(name = "sum", nullable = false)
-    private float sum;
+    private BigDecimal sum;
 
     @Column(name = "point", nullable = false)
-    private long point;
+    private int point;
 
     @OneToMany(mappedBy = "invoiceEntities")
     private Set<InvoiceMenuEntities> invoiceMenus;
+    
+    @Column(name = "invoice_status", nullable = false)
+    private boolean invoiceStatus;
 
     // Getters and Setters
     public int getInvoiceId() {
@@ -75,19 +79,19 @@ public class InvoiceEntities {
         this.createDate = createDate;
     }
 
-    public float getSum() {
+    public BigDecimal getSum() {
         return sum;
     }
 
-    public void setSum(float d) {
-        this.sum = d;
+    public void setSum(BigDecimal f) {
+        this.sum = f;
     }
 
-    public long getPoint() {
+    public int getPoint() {
         return point;
     }
 
-    public void setPoint(long point) {
+    public void setPoint(int point) {
         this.point = point;
     }
 
@@ -98,4 +102,20 @@ public class InvoiceEntities {
     public void setInvoiceMenus(Set<InvoiceMenuEntities> invoiceMenus) {
         this.invoiceMenus = invoiceMenus;
     }
+
+	public List<InvoiceMenuEntities> getInvoiceMenuEntities() {
+		return invoiceMenuEntities;
+	}
+
+	public void setInvoiceMenuEntities(List<InvoiceMenuEntities> invoiceMenuEntities) {
+		this.invoiceMenuEntities = invoiceMenuEntities;
+	}
+
+	public boolean isInvoiceStatus() {
+		return invoiceStatus;
+	}
+
+	public void setInvoiceStatus(boolean invoiceStatus) {
+		this.invoiceStatus = invoiceStatus;
+	}
 }

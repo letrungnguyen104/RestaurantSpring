@@ -1,5 +1,6 @@
 package com.myRestaurant.manager.Controller;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -157,7 +158,7 @@ public class ChoosetableController {
 	            invoice.setTable(table);
 	            invoice.setUser(user);
 	            invoice.setCreateDate(new Timestamp(System.currentTimeMillis()));
-	            invoice.setSum(0.0f);
+	            invoice.setSum(BigDecimal.valueOf(0.0));
 	            invoice.setPoint(0);
 	            invoiceRepository.save(invoice);
 	        } else {

@@ -2,6 +2,8 @@ package com.myRestaurant.manager.Entities;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,6 +39,7 @@ public class UserEntities {
 	
 	@ManyToOne
 	@JoinColumn(name = "role_id")
+	@JsonManagedReference
 	private RoleEntities roleEntities;
 	
 	@OneToMany(mappedBy = "user")

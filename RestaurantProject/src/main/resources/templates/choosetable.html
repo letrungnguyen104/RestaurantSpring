@@ -138,7 +138,7 @@
                         body: JSON.stringify({
                             tableId: selectedTable,
                             userId: userId, // Truyền userId từ localStorage
-                            isAvailable: false, // Cập nhật trạng thái bàn thành "đang sử dụng"
+                            isAvailable: true, // Cập nhật trạng thái bàn thành "đang sử dụng"
                         }),
                     })
                         .then(response => response.json())
