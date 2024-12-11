@@ -44,8 +44,10 @@ form > *{
     padding: 10px 5px;
     border-radius: 30px;
     margin: 10px;
-    border: 1px solid #427aae;
+    border: 2px solid #7dacd7;
     background-color: rgba(255, 255, 255, 0.7);
+    padding-left: 10px;
+    font-size: 15px;
 }
 .information input > *{
     margin-left: 20px;
@@ -73,6 +75,9 @@ form > *{
     font-size: 14px;
     transition: 0.2s all ease-in;
 }
+.create-acc-btn{
+    width: 200px;
+}
 .button > *:hover, .create-acc-btn:hover{
     background-color: #4d8cc7;
 }
@@ -81,4 +86,10 @@ form{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+input::placeholder{
+    color: rgb(197, 208, 217);
+    margin-left: 10px;
+    font-size: 15px;
 }
