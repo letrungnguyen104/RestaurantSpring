@@ -35,7 +35,7 @@ public class PayController {
         return invoiceService.searchInvoicesByTableId(tableId);
     }
     
- // @PostMapping("/pay/payment/{invoiceId}")
+    @PostMapping("/pay/payment/{invoiceId}")
     public ResponseEntity<ResponseData> processPayment(@PathVariable int invoiceId) {
         boolean isPaid = invoiceService.processPayment(invoiceId);
         ResponseData response = new ResponseData();
