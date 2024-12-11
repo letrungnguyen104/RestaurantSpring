@@ -1,6 +1,7 @@
 package com.myRestaurant.manager.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -14,4 +15,7 @@ public interface InvoiceRepository extends JpaRepository<InvoiceEntities, Intege
 
     // Tìm tất cả hóa đơn chưa thanh toán
     List<InvoiceEntities> findByInvoiceStatus(boolean invoiceStatus);
+    
+    // Tìm hóa đơn theo invoiceId
+    Optional<InvoiceEntities> findById(int invoiceId);
 }
