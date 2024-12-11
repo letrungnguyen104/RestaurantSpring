@@ -3,6 +3,7 @@ package com.myRestaurant.manager.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,8 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.myRestaurant.manager.Dto.InvoiceDto;
 import com.myRestaurant.manager.Dto.UserDto;
+import com.myRestaurant.manager.Entities.InvoiceEntities;
+import com.myRestaurant.manager.Entities.TableEntities;
 import com.myRestaurant.manager.Payload.ResponseData;
+import com.myRestaurant.manager.Payload.Response.ResponseDto;
+import com.myRestaurant.manager.Repository.InvoiceRepository;
+import com.myRestaurant.manager.Repository.TableRepository;
 import com.myRestaurant.manager.Service.InvoiceService;
+import com.myRestaurant.manager.Service.TableService;
 
 @CrossOrigin("*")
 @RestController
@@ -24,6 +31,15 @@ import com.myRestaurant.manager.Service.InvoiceService;
 public class PayController {
 	@Autowired
     private InvoiceService invoiceService;
+	
+	@Autowired
+	private TableService tableService;
+	
+	@Autowired
+	InvoiceRepository invoiceRepository;
+	
+	@Autowired
+	TableRepository tableRepository;
 
 	@GetMapping("/pay/list-invoice")
     public List<InvoiceDto> getInvoices() {
@@ -37,21 +53,45 @@ public class PayController {
     
     @PostMapping("/pay/payment/{invoiceId}")
     public ResponseEntity<ResponseData> processPayment(@PathVariable int invoiceId) {
-        boolean isPaid = invoiceService.processPayment(invoiceId);
-        ResponseData response = new ResponseData();
-        if (isPaid) {
-            response.setStatus(200);
-            response.setDescription("Thanh toán thành công");
-            response.setData(null);  // or any other relevant data you want to return
-            response.setRole_Id(1); // Example: Assuming 1 is the cashier role
-        } else {
-            response.setStatus(400);
-            response.setDescription("Có lỗi xảy ra");
-            response.setData(null); // No additional data in case of error
-            response.setRole_Id(1); // Example role
-        }
+        // Tìm hóa đơn theo invoiceId
+        InvoiceEntities invoice = invoiceRepository.findById(invoiceId).orElse(null);
+        
+        if (invoice != null && !invoice.isInvoiceStatus()) {  // Chỉ xử lý nếu hóa đơn chưa thanh toán
+            // Đánh dấu hóa đơn đã thanh toán
+            invoice.setInvoiceStatus(true);
+            invoiceRepository.save(invoice);
+            
+            // Cập nhật trạng thái bàn
+            TableEntities table = invoice.getTable();
+            table.setTableStatus(false);  // Đánh dấu bàn trống
+            tableRepository.save(table);
 
-        return ResponseEntity.status(response.getStatus()).body(response);
+            // Tạo đối tượng responseDto
+            ResponseData responseDto = new ResponseData();
+            responseDto.setStatus(200);
+            responseDto.setDescription("Thanh toán thành công!");
+            responseDto.setData(table.getTableId());  // Trả về mã bàn
+            
+            return new ResponseEntity<>(responseDto, HttpStatus.OK);
+        } else {
+            // Nếu hóa đơn không tồn tại hoặc đã thanh toán
+            ResponseData responseDto = new ResponseData();
+            responseDto.setStatus(400);
+            responseDto.setDescription("Hóa đơn đã thanh toán hoặc không tồn tại");
+            
+            return new ResponseEntity<>(responseDto, HttpStatus.BAD_REQUEST);
+        }
+    }
+ // Cập nhật trạng thái của bàn khi thanh toán thành công
+    @PostMapping("/update-table-status/{tableId}")
+    public String updateTableStatus(@PathVariable("tableId") String tableId) {
+        // Thực hiện logic để cập nhật trạng thái bàn
+        boolean updated = tableService.updateTableStatus(tableId, true); // True = Bàn trống
+
+        if (updated) {
+            return "redirect:/homepage-cashier/pay"; // Trở về trang danh sách hóa đơn
+        }
+        return "error"; // Nếu không thành công, có thể hiển thị trang lỗi
     }
 
 }

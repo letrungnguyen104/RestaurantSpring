@@ -5,4 +5,5 @@ import com.myRestaurant.manager.Entities.TableEntities;
 
 public interface TableServiceImpl {
 	TableEntities addTable(TableDto tableDto);
+	boolean updateTableStatus(String tableId, boolean isAvailable);
 }

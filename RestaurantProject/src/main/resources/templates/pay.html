@@ -122,30 +122,39 @@
                     if (data.status === 200) { // Kiểm tra trạng thái trả về từ backend
                         alert("Thanh toán thành công");
 
-                        // Lấy lại danh sách hóa đơn
-                        fetch('/homepage-cashier/pay/list-invoice')
-                            .then(response => response.json())
-                            .then(newInvoices => {
-                                const tbody = document.querySelector('.table-screen tbody');
-                                tbody.innerHTML = ''; // Xóa danh sách cũ
+                        // Cập nhật trạng thái bàn
+                        const tableId = data.tableId; // Dữ liệu trả về phải bao gồm tableId
+                        fetch(`/homepage-cashier/pay/update-table-status/${tableId}`, {
+                            method: 'POST'
+                        })
+                        .then(response => response.json())
+                        .then(() => {
+                            // Sau khi cập nhật, lấy lại danh sách hóa đơn
+                            fetch('/homepage-cashier/pay/list-invoice')
+                                .then(response => response.json())
+                                .then(newInvoices => {
+                                    const tbody = document.querySelector('.table-screen tbody');
+                                    tbody.innerHTML = ''; // Xóa danh sách cũ
 
-                                // Cập nhật danh sách mới
-                                newInvoices.forEach(invoice => {
-                                    const row = document.createElement('tr');
-                                    row.innerHTML = `
-                                        <td>${invoice.invoiceId}</td>
-                                        <td>${invoice.userId}</td>
-                                        <td>${invoice.tableId}</td>
-                                        <td>${invoice.sum}đ</td>
-                                        <td>
-                                            <a class="edit-button" href="/homepage-admin/detail-invoice/${invoice.invoiceId}">Chi tiết</a>
-                                            <button class="delete-button" onclick="confirmPayment(${invoice.invoiceId})">Thanh toán</button>
-                                        </td>
-                                    `;
-                                    tbody.appendChild(row);
-                                });
-                            })
-                            .catch(error => console.error('Error fetching invoices:', error));
+                                    // Cập nhật danh sách mới
+                                    newInvoices.forEach(invoice => {
+                                        const row = document.createElement('tr');
+                                        row.innerHTML = `
+                                            <td>${invoice.invoiceId}</td>
+                                            <td>${invoice.userId}</td>
+                                            <td>${invoice.tableId}</td>
+                                            <td>${invoice.sum}đ</td>
+                                            <td>
+                                                <a class="edit-button" href="/homepage-admin/detail-invoice/${invoice.invoiceId}">Chi tiết</a>
+                                                <button class="delete-button" onclick="confirmPayment(${invoice.invoiceId})">Thanh toán</button>
+                                            </td>
+                                        `;
+                                        tbody.appendChild(row);
+                                    });
+                                })
+                                .catch(error => console.error('Error fetching invoices:', error));
+                        })
+                        .catch(error => console.error('Error updating table status:', error));
                     } else {
                         alert("Đã có lỗi xảy ra khi thanh toán");
                     }

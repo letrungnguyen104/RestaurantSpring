@@ -42,4 +42,14 @@ public class TableService implements TableServiceImpl{
 
         return tableRepository.save(tableEntity);  // Lưu bàn vào cơ sở dữ liệu
     }
+    @Override
+    public boolean updateTableStatus(String tableId, boolean isAvailable) {
+        TableEntities table = tableRepository.findById(tableId).orElse(null);
+        if (table != null) {
+            table.setTableStatus(isAvailable); // Thay đổi trạng thái bàn
+            tableRepository.save(table); // Lưu lại thay đổi
+            return true;
+        }
+        return false;
+    }
 }
