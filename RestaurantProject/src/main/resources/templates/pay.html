@@ -48,7 +48,7 @@
                                 <td th:text="${invoice.tableId}"></td>
                                 <td th:text="${invoice.sum} + 'đ'"></td>
                                 <td>
-                                    <a class="edit-button" th:href="@{/homepage-admin/detail-invoice/{id}(id=${invoice.invoiceId})}">Chi tiết</a>
+                                    <a class="edit-button" th:href="@{/homepage-cashier/invoice-pay/detail-invoice/{id}(id=${invoice.invoiceId})}">Chi tiết</a>
                                     <button class="delete-button" th:onclick="'confirmPayment(' + ${invoice.invoiceId} + ')'" >Thanh toán</button>
                                 </td>
                             </tr>
@@ -99,7 +99,7 @@
                                 <td>${invoice.tableId}</td>
                                 <td>${invoice.sum}đ</td>
                                 <td>
-                                    <a class="edit-button" href="/homepage-admin/detail-invoice/${invoice.invoiceId}">Chi tiết</a>
+                                <a class="edit-button" th:href="@{/homepage-cashier/invoice-pay/detail-invoice/{id}(id=${invoice.invoiceId})}">Chi tiết</a>
                                     <button class="delete-button" onclick="confirmPayment(${invoice.invoiceId})">Thanh toán</button>
                                 </td>
                             `;
@@ -145,7 +145,7 @@
                                             <td>${invoice.tableId}</td>
                                             <td>${invoice.sum}đ</td>
                                             <td>
-                                                <a class="edit-button" href="/homepage-admin/detail-invoice/${invoice.invoiceId}">Chi tiết</a>
+                                            <a class="edit-button" th:href="@{/homepage-cashier/invoice-pay/detail-invoice/{id}(id=${invoice.invoiceId})}">Chi tiết</a>
                                                 <button class="delete-button" onclick="confirmPayment(${invoice.invoiceId})">Thanh toán</button>
                                             </td>
                                         `;

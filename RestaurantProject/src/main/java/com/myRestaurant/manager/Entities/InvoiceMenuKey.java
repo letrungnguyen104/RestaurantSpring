@@ -16,8 +16,8 @@ public class InvoiceMenuKey implements Serializable {
     
     public InvoiceMenuKey() {};
     
-    public InvoiceMenuKey(int invoie_id, int dish_id) {
-    	this.invoice_id = invoie_id;
+    public InvoiceMenuKey(int invoice_id, int dish_id) {
+    	this.invoice_id = invoice_id;
     	this.dish_id = dish_id;
     }
 }

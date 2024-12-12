@@ -1,5 +1,6 @@
 package com.myRestaurant.manager.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.myRestaurant.manager.Dto.InvoiceDetailDto;
 import com.myRestaurant.manager.Dto.InvoiceDto;
 import com.myRestaurant.manager.Dto.UserDto;
 import com.myRestaurant.manager.Entities.InvoiceEntities;
@@ -89,9 +92,20 @@ public class PayController {
         boolean updated = tableService.updateTableStatus(tableId, true); // True = Bàn trống
 
         if (updated) {
-            return "redirect:/homepage-cashier/pay"; // Trở về trang danh sách hóa đơn
+            return "redirect:/homepage-cashier/pay";
         }
-        return "error"; // Nếu không thành công, có thể hiển thị trang lỗi
+        return "error";
+    }
+    
+    @GetMapping("/detail-invoice/{invoiceId}")
+    @ResponseBody
+    public ResponseEntity<List<InvoiceDetailDto>> getInvoiceDetails(@PathVariable int invoiceId) {
+        List<InvoiceDetailDto> details = invoiceService.getInvoiceDetails(invoiceId);
+        if (details != null && !details.isEmpty()) {
+            return ResponseEntity.ok(details);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ArrayList<>());
+        }
     }
 
 }

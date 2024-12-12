@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.myRestaurant.manager.Dto.InvoiceDetailDto;
 import com.myRestaurant.manager.Dto.InvoiceDto;
 import com.myRestaurant.manager.Entities.InvoiceEntities;
 import com.myRestaurant.manager.Repository.InvoiceRepository;
@@ -60,5 +61,17 @@ public class InvoiceService implements InvoiceServiceImpl{
 	    invoiceRepository.save(invoice); // Lưu thay đổi
 
 	    return true;
+	}
+
+	@Override
+	public List<InvoiceDetailDto> getInvoiceDetails(int invoiceId) {
+		return invoiceRepository.findInvoiceDetailsByInvoiceId(invoiceId);
+//		List<InvoiceDetailDto> details = invoiceRepository.findInvoiceDetailsByInvoiceId(invoiceId);
+//	    if (details == null || details.isEmpty()) {
+//	        System.out.println("Không tìm thấy chi tiết hóa đơn cho ID: " + invoiceId);
+//	    } else {
+//	        System.out.println("Tìm thấy chi tiết hóa đơn: " + details);
+//	    }
+//	    return details;
 	}
 }
